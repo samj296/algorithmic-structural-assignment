@@ -7,6 +7,18 @@ class TreeNode{
     };
 };
 
+function createFolder(parent, node){
+    // if there is no parent this node will be treated as root
+    let newNode = new TreeNode(node)
+    if(parent === null){
+         return newNode;
+    }else{
+        parent.children.push(newNode);
+        return newNode;
+    };
+};
+
+
 function filePath(node, path){
     if(!node) return;
     let i = 0 ;

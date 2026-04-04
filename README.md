@@ -1,3 +1,6 @@
+⚠️ Warning: You’re using the most powerful terminal ever created. One wrong move and your imaginary files or folders may vanish into the void.
+
+
 File System
 I was plannig to create the file system with the usual class that we learned in the class
 
@@ -20,3 +23,6 @@ class TreeNode{
 };
 ```
 this way the folder can hold as many folder as client wants
+
+To-Do
+- [ ] function to grab node from the path client is sending
