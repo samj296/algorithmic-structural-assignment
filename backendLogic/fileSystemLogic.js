@@ -1,3 +1,5 @@
+const TreeNode = require("../models/FileSystem")
+
 function createFolder(parent, node){
     // if there is no parent this node will be treated as root
     let newNode = new TreeNode(node)
@@ -72,4 +74,4 @@ function filePath(node, path){
     return subFolder;
 };
 
-module.exports = {createFolder, moveFolder, filePath};
+module.exports = {createFolder, moveFolder, filePath, findNodeByPath};
