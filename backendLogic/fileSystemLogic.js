@@ -1,5 +1,10 @@
 const TreeNode = require("../models/FileSystem")
 
+function createRoot(name){
+    let root = new TreeNode(name)
+    return root;
+};
+
 function createFolder(parent, node){
     // if there is no parent this node will be treated as root
     let newNode = new TreeNode(node)
@@ -47,6 +52,23 @@ function findNodeByPath(root, path){
     return currentNode;
 };
 
+function findParentByPath(root, path){
+    const pathArray = path.split("/").filter(Boolean); //Boolean will return only the strings that
+                            // undefined and emty string will be ignored
+    // if array has the length of 1 then root is the parent
+    if(pathArray.length <= 1) return root;
+    const parentPathArray = pathArray.slice(0, pathArray.length-1);
+
+    let currentNode = root;
+    for(const name of parentPathArray){
+        const nextNode = currentNode.children.find(child => child.name === name);
+        if(!nextNode) return null; // invalid path
+        currentNode = nextNode
+    };
+
+    return currentNode;
+};
+
 function filePath(node, path){
     if(!node) return;
     let i = 0 ;
@@ -74,4 +96,4 @@ function filePath(node, path){
     return subFolder;
 };
 
-module.exports = {createFolder, moveFolder, filePath, findNodeByPath};
+module.exports = {createRoot, createFolder, moveFolder, filePath, findNodeByPath, findParentByPath};
