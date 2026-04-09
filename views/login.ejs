@@ -1,0 +1,21 @@
+            <%- include("partials/header",{
+                title: "Mighty Husk - Login"
+            }) %>
+    <body>
+            <div id = "warning-panel">
+            <header>L o a d i n g  D O O R  O S......</header>
+            <p>Disk Operating Output Runtime</p>
+        </div>
+    
+        <form>
+            <input id = "login-email" class = "email-input" type = "text" placeholder = "email" name = "name" required>
+            <br>
+            <input id = "login-password" class = "password-input" type = "password" placeholder = "Password">
+            <br>
+            <button id = "signin" type = "submit" data-action = "login">Login</button>
+            <button id = "signup-btn" type = "button" data-action="sign-up">Sign Up</button>
+            <button id = "reset" type = "reset" data-action = "reset">Reset</button>
+        </form>
+        <script type="module" src = "/script/function.js"></script>
+    </body>
+</html>

@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const fsController = require("../controllers/fileSystemController");
+const ensureLoggedIn = require("../middleware/ensureLoggedIn");
 
-router.get("/", fsController.createRoot)
 //create folder
-router.post("/create", fsController.createFolder);
+router.post("/create", ensureLoggedIn, fsController.createFolder);
 
 //movefolder
-router.post("/move", fsController.moveFolder );
+router.post("/move", ensureLoggedIn,fsController.moveFolder );
 
+module.exports = router;

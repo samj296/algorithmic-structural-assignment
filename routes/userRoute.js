@@ -15,3 +15,4 @@ router.post("login", passport.authenticate("local"), (req, res) => {
     //here I will render the homepage
 });
 
+module.exports = router;

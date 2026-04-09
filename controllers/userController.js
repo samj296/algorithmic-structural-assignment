@@ -25,4 +25,5 @@ exports.getSignUpPage = (req, res) => {
 
 exports.login = (req, res) => {
     // render login page here
+    res.render("login")
 };

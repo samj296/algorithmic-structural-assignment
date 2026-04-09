@@ -11,8 +11,8 @@ const PORT = process.env.PORT || 3000;
 const MONOGODB_URI = process.env.MONOGODB_URI;
 
 // importing routes
-
-
+const fileSystemRoute = require("./routes/fileSystemRoute");
+const userRoute = require("./routes/userRoute");
 
 // middleware
 app.use(express.json());
@@ -40,6 +40,9 @@ app.use(errorHandler);
 
 
 // routes
+
+app.use("/", userRoute);
+app.use("/fs", fileSystemRoute);
 
 // running server
 mongoose

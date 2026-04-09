@@ -1,0 +1,16 @@
+
+            <%- include("partials/header",{
+                title: "Mighty Husk - Terminal"
+            }) %>
+<body id = "terminal-body">
+    <div>
+        <textarea id = "terminal-output" readonly spellcheck="false" wrap="soft">
+        </textarea>
+        <form>
+            <p id = "user-folder-location"></p>
+            <input type = "text" id = "command" required />    
+        </form>
+        
+    </div>
+    <script type="module" src = "/script/function.js"></script>
+</body>
