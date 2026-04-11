@@ -5,6 +5,7 @@ function createRoot(name){
     return root;
 };
 
+
 function createFolder(parent, node){
     // if there is no parent this node will be treated as root
     let newNode = new TreeNode(node)
@@ -40,6 +41,8 @@ function moveFolder(newPath,oldPath, root){
     newParent.children.push(node);
     // update parent reference
     node.parent = newParent;
+    // no need to return the root as the root is an object this function will modify the original tree itself
+    //objects are passed as the reference
 };
 
 function findNodeByPath(root, path){

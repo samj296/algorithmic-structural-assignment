@@ -6,7 +6,7 @@ const userController = require("../controllers/userController");
 
 router.get("/signup", userController.getSignUpPage);
 router.get("/", userController.login);
-
+router.post("/logout", userController.logout);
 // --------------- protected route --------------------------
 
 router.post("login", passport.authenticate("local"), (req, res) => {

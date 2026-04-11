@@ -1,12 +1,17 @@
-            <%- include("partials/header",{
-                title: "Mighty Husk - Login"
-            }) %>
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title> <%= title %> </title>
+        <link rel="stylesheet" href = "/assets/CSS/style.css">
+    </head>
     <body>
-            <div id = "warning-panel">
-            <header>L o a d i n g  D O O R  O S......</header>
-            <p>Disk Operating Output Runtime</p>
-        </div>
-    
+           
+           <%- include("partials/header",{
+                title: "Mighty Husk - Login",
+                header: "L o a d i n g  D O O R  O S......",
+                pTag: "Disk Operating Output Runtime"
+            }) %>
+        
         <form>
             <input id = "login-email" class = "email-input" type = "text" placeholder = "email" name = "name" required>
             <br>

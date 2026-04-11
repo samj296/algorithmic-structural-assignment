@@ -1,16 +1,28 @@
-
-            <%- include("partials/header",{
-                title: "Mighty Husk - Terminal"
-            }) %>
-<body id = "terminal-body">
-    <div>
-        <textarea id = "terminal-output" readonly spellcheck="false" wrap="soft">
-        </textarea>
-        <form>
-            <p id = "user-folder-location"></p>
-            <input type = "text" id = "command" required />    
-        </form>
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title> <%= title %> </title>
+        <link rel="stylesheet" href = "/assets/CSS/style.css">
+    </head>
+    <body>
+                <%- include("partials/header",{
+                    title: "Mighty Husk - Terminal"
+                    header: "⚠️ Mighty Husk Safety Advisory",
+                    pTag: "Warning: Mighty Husk is powerful 
+                            enough to delete folders that don’t even exist. Type carefully.
+                            Your imaginary data depends on it."
+                }) %>
         
-    </div>
-    <script type="module" src = "/script/function.js"></script>
-</body>
+        <div>
+            <textarea id = "terminal-output" readonly spellcheck="false" wrap="soft">
+            </textarea>
+            <form>
+                <p id = "user-folder-location"></p>
+                <input type = "text" id = "command" required />    
+            </form>
+            
+        </div>
+        <script type="module" src = "/script/function.js"></script>
+    </body>
+
+</html

@@ -7,6 +7,9 @@ const ensureLoggedIn = require("../middleware/ensureLoggedIn");
 router.post("/create", ensureLoggedIn, fsController.createFolder);
 
 //movefolder
-router.post("/move", ensureLoggedIn,fsController.moveFolder );
+router.post("/move", ensureLoggedIn, fsController.moveFolder );
+
+//send the root
+router.get("/root", ensureLoggedIn, fsController.getRoot)
 
 module.exports = router;

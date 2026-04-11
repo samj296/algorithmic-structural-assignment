@@ -27,3 +27,15 @@ exports.login = (req, res) => {
     // render login page here
     res.render("login")
 };
+
+exports.logout = (req, res, next) => {
+    req.logout(function(err){
+        if(err) return next(err);
+        if(req.headers.accept && req.headers.accept.includes("application/json")){
+            return res.status(200).json({
+                redirect: "/"
+            });
+        };
+        res.redirect("/")
+    });
+};
