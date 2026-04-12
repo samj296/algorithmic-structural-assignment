@@ -12,4 +12,7 @@ router.post("/move", ensureLoggedIn, fsController.moveFolder );
 //send the root
 router.get("/root", ensureLoggedIn, fsController.getRoot)
 
+//change Directory
+router.post("/cd", ensureLoggedIn, fsController.changeDirectory);
+
 module.exports = router;

@@ -16,4 +16,4 @@ async function api(path, options = {}){
     return data;
 };
 
-export {api}
+export {api};

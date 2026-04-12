@@ -67,3 +67,15 @@ exports.moveFolder = async(req, res) => {
         });
     };
 };
+
+exports.changeDirectory = async(req, res) => {
+    const root = req.session.root;
+    const target = req.body.path;
+
+    const node = fsLogic.findNodeByPath(root, target);
+    if(!node){
+        return res.status(400).json({error: "Invalid path"});
+    };
+    req.session.currentPath = target;
+    res.status(200).json({path: target});
+};

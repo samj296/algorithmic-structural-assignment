@@ -12,6 +12,7 @@ router.post("/logout", userController.logout);
 router.post("login", passport.authenticate("local"), (req, res) => {
     // creating fresh root for the user
     req.session.root = fsLogic.createRoot("root");
+    req.session.currentPath = "/"
     //here I will render the homepage
 });
 

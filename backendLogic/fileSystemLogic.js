@@ -74,8 +74,6 @@ function findParentByPath(root, path){
 
 function filePath(node, path){
     if(!node) return;
-    let i = 0 ;
-    const obj = [];
     let rootPath = ""
     if(path === `/`){
          rootPath = node.value;

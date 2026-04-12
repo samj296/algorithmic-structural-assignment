@@ -6,7 +6,10 @@
 
 import {Command} from "./hashtable.js";
 import {api} from "./fetch.js"
+import {creatBinaryTree} from "./dsa.js";
+
 const terminalOutput = document.getElementById("terminal-output");
+
 
 function helpCommand(){
     let output = "\nCommands:\n"
@@ -74,4 +77,37 @@ async function loadingPage(str){
     
 };
 
-export {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, getTree, loadingPage};
+async function changeDirectory(directory){
+    const path = document.getElementById("user-folder-location"); //parent folder will be in this path
+    if(directory == null){
+        terminalOutput += `Invalid command \n`
+        return;
+    };
+    if(directory === ".."){ // if its not root go to parent folder
+       pathArray = path.innerText.split("/");
+       pathArray.pop();
+       parentPath = "/" + pathArray.join("/");
+    }; 
+
+    data = await api("/cd",{
+        method: "POST",
+        body: JSON.stringify({path: parentPath})
+    });
+    
+
+};
+
+function bfs(root){
+    binaryRoot = creatBinaryTree(root);
+    
+    let q = [binaryRoot];
+
+    while(q.length>0){
+        let current = q.shift()
+        terminalOutput.value += `\n ${current.value}`
+        if(current.left) q.push(current.left);
+        if(current.right) q.push(current.right);
+    };
+};
+
+export {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, getTree, loadingPage, bfs};

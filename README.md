@@ -34,8 +34,9 @@ this way the folder can hold as many folder as client wants
 To-Do
 - [ ] function to grab node from the path client is sending
 - [ ] create signup page
-- [ ]  create login page
-
+- [x] create login page
+- [ ] terminal designing
+- [ ] 
 # Notes: -
 ## Why used Boolean in ↓
 ```js

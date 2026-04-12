@@ -1,28 +1,36 @@
-
+import {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, getTree, loadingPage, bfs} from "./function"
 const Command = {
     help: {
         run: helpCommand,
-        description: `This command will give you all the list of command with short description`
+        description: `Lists all available commands with description`
     },
     clear: {
         run: clearCommand,
-        description: `This command will clear the terminal`
+        description: `Clear the terminal`
     },
     exit: {
         run: exitCommand,
-        description: `This command will exit the terminal`
+        description: `exit the terminal(logout)`
     },
     mkdir: {
         run: createFolder,
-        description: `This command will create a folder`
+        description: `Creates a new folder`
     },
     cd: {
         run: changeDirectory,
-        description: `This command will change the desired directory`
+        description: `Moves or renames a folder/file`
     },
     mv: {
         run: moveFolder,
-        description: `This command will let you move the directory/file to new directory or to rename the directory/file`
+        description: `Moves a folder/file`
+    },
+    bfs: {
+        run: bfs,
+        description: `converts non binary tree(directory) and change it to the binary tree and will run the bfs`
+    },
+    dfs: {
+        run: dfs,
+        description: `converts non binary tree(directory) and change it to the binary tree and will run the dfs`
     }
 };
 
