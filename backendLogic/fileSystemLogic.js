@@ -1,4 +1,4 @@
-const TreeNode = require("../models/FileSystem")
+const {TreeNode} = require("../models/FileSystem")
 
 function createRoot(name){
     let root = new TreeNode(name)

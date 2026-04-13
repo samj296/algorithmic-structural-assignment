@@ -13,6 +13,8 @@ exports.createUser = async(req, res) => {
 
     try{
         await User.create({name, email, passwordHash});
+        
+        res.redirect("/");
     }catch(err){
         console.log("Signup error", err)
         return res.status(400).send("Unable to signup, check username or password");
@@ -20,13 +22,14 @@ exports.createUser = async(req, res) => {
 };
 
 exports.getSignUpPage = (req, res) => {
-    // render signup page here
+    res.render("signup");
 };
 
-exports.login = (req, res) => {
+exports.getloginPage = (req, res) => {
     // render login page here
     res.render("login");
 };
+
 
 exports.logout = (req, res, next) => {
     req.logout(function(err){

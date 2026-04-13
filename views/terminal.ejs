@@ -6,24 +6,21 @@
     </head>
     <body>
                 <%- include("partials/header",{
-                    title: "Mighty Husk - Terminal"
+                    title: "Mighty Husk - Terminal",
                     header: "⚠️ Mighty Husk Safety Advisory",
-                    pTag: "Warning: Mighty Husk is powerful 
-                            enough to delete folders that don’t even exist. Type carefully.
-                            Your imaginary data depends on it."
+                    pTag: "Warning: Mighty Husk is powerful enough to delete folders that don’t even exist. Type carefully. Your imaginary data depends on it."
                 }) %>
         
-        <div>
-            <textarea id = "terminal-output" readonly spellcheck="false" wrap="soft">
+        <textarea id = "terminal-output" class = "input" readonly spellcheck="false" wrap="soft">
             </textarea>
-            <form>
-                <p id = "drive">C:/</p>
-                <p id = "user-folder-location"></p>
-                <input type = "text" id = "command" required />    
+            <form class = "input" id = "terminal-input">
+                <p id = "drive" class = "input">C:/</p>
+                <p id = "user-folder-location" class = "input"></p>
+            <input type = "text" id = "command" required class = "input"/>    
             </form>
             
         </div>
         <script type="module" src = "/script/terminalEngine.js"></script>
     </body>
 
-</html
+</html>

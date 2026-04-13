@@ -4,9 +4,18 @@
 
 //This module is just for the assignment
 
-module.exports = {TreeNode}
-
 //using recursive way to get all node
+
+class TreeNode{
+    constructor(value){
+        this.value = value;
+        this.type = null
+        this.children = [];
+        this.parent = null;
+    };
+};
+
+
 function getAllNode(root, result = []){
     if(!root) return result;
 
@@ -65,4 +74,4 @@ function dfs(binaryRoot){
    };
 };
 
-export {createBinaryTree, dfs, bfs};
+export {createBinaryTree, dfs, bfs, TreeNode};

@@ -31,7 +31,7 @@ async function exitCommand(){
 };
 
 async function createFolder(name, path){
-    const data = await api("/create",{
+    const data = await api("/fs/create",{
         method: "POST",
         body:JSON.stringify({name, path})
     });
@@ -42,7 +42,7 @@ async function createFolder(name, path){
 
 async function moveFolder(oldPath, newPath, name){
     //const {newPath, oldPath} = req.body; backend pattern
-    const data = await api("/move",{
+    const data = await api("/fs/move",{
         method: "POST",
         body:JSON.stringify({oldPath, newPath})
     });
@@ -56,7 +56,7 @@ async function moveFolder(oldPath, newPath, name){
 };
 
 async function getTree(){
-    const data = await api("/root",{
+    const data = await api("/fs/root",{
         method: "GET",
     });
     if(!data) return "Unable to get root";
@@ -71,7 +71,7 @@ async function loadingPage(str){
     
 };
 
-async function changeDirectory(directory, fullCmd){
+async function changeDirectory(directory){
     const path = document.getElementById("user-folder-location"); //parent folder will be in this path
     if(!directory){
         terminalOutput.value += `Invalid command \n`
@@ -82,27 +82,27 @@ async function changeDirectory(directory, fullCmd){
         const pathArray = path.innerText.split("/").filter(Boolean);
         pathArray.pop()
         const parentPath = `/${pathArray.join("/")}`
-        data = await api("/cd",{
+        data = await api("/fs/cd",{
         method: "POST",
         body: JSON.stringify({path: parentPath})
        });
     }else if(directory.startsWith("/")){ // if directory start with "/" then its an absolute path 
-        data = await api("/cd",{
+        data = await api("/fs/cd",{
             method: "POST",
             body: JSON.stringify({path:directory})
         });
     }else{ //it menas it just folder name from the children list
-        data = await api("/cd",{
+        data = await api("/fs/cd",{
             method: "POST",
             body: JSON.stringify({path: `${path.innerText}/${directory}`})
         });
     }; 
 
     if(data.error){
-        terminalOutput.value += ` ${fullCmd}\n invalid path: ${directory}\n`;
+        terminalOutput.value += `invalid path: ${directory}\n`;
         return;
     };
-    terminalOutput.value += `${fullCmd}\n`
+    
     path.innerText = data.path;
 
 };

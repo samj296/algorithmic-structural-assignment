@@ -6,9 +6,9 @@ module.exports = function ensureLoggedIn(req, res, next){
     if(req.headers.accept && req.headers.accept.includes("application/json")){
         return res.status(401).json({
             error: "Session expired",
-            redirect: "/login"
+            redirect: "/"
         });
     };
     // if the request is made from the normal navigation
-    res.redirect("/login");
+    res.redirect("/");
 };

@@ -1,37 +1,69 @@
-import {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, changeDirectory, runBfs, runDFS} from "./function"
+import {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, changeDirectory, runBfs, runDFS} from "./function.js"
+
+const terminalOutput = document.getElementById("terminal-output");
+
 const Command = {
     help: {
         run: helpCommand,
         description: `Lists all available commands with description`
     },
+
     clear: {
         run: clearCommand,
         description: `Clear the terminal`
     },
+
     exit: {
         run: exitCommand,
-        description: `exit the terminal(logout)`
+        description: `Exit the terminal (logout)`
     },
+
     mkdir: {
-        run: createFolder,
-        description: `Creates a new folder`
+        description: `Creates a new folder`,
+        run(args) {
+            terminalOutput.value += args + "\n";
+            const name = args.trim();
+            const currentPath = document.getElementById("user-folder-location").innerText;
+            createFolder(name, currentPath);
+        }
     },
+
     cd: {
-        run: changeDirectory,
-        description: `Moves or renames a folder/file`
+        description: `Change directory`,
+        run(args) {
+            terminalOutput.value += args + "\n";
+            cmd = args.split(" ");
+            if(cmd){}
+            changeDirectory(args.trim());
+        }
     },
+
     mv: {
-        run: moveFolder,
-        description: `Moves a folder/file`
+        description: `Moves a folder/file`,
+        run(args) {
+            terminalOutput.value += args + "\n";
+            const [oldPath, newPath] = args.split(" ");
+            moveFolder(oldPath, newPath);
+        }
     },
+
     bfs: {
-        run: runBfs,
-        description: `converts non binary tree(directory) and change it to the binary tree and will run the bfs`
+        run(){
+            terminalOutput.value += "bfs \n";
+            runBfs()
+        },
+        description: `Convert N-ary tree to binary tree and run BFS`
     },
+
     dfs: {
-        run: runDFS,
-        description: `converts non binary tree(directory) and change it to the binary tree and will run the dfs`
+        run(){
+            terminalOutput.value += "dfs \n";
+            runDFS();
+        },
+        description: `Convert N-ary tree to binary tree and run DFS`
     }
 };
+
+
 
 export  {Command};

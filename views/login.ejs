@@ -7,19 +7,19 @@
     <body>
            
            <%- include("partials/header",{
-                header: "L o a d i n g  D O O R  O S......",
+                header: "L o a d i n g (D O O R) Operating System......",
                 pTag: "Disk Operating Output Runtime"
             }) %>
-        
+        <h1>Login Page</h1>
         <form action="/login" method = "POST" class = "login-form">
-            <input id = "login-email" class = "input" type = "text" placeholder = "email" name = "name" required>
+            <input id = "login-email" class = "input" type = "text" placeholder = "email" name = "email" required>
             <br>
-            <input id = "login-password" class = "input" type = "password" placeholder = "Password">
+            <input id = "login-password" class = "input" type = "password" name = "password" placeholder = "Password">
             <br>
             <button id = "signin" class = "btn" type = "submit" data-action = "login">Login</button>
             <button id = "signup-btn" class = "btn" type = "button" data-action="sign-up">Sign Up</button>
             <button id = "reset" class = "btn" type = "reset" data-action = "reset">Reset</button>
         </form>
-        <script type="module" src = "/script/terminalEngine.js"></script>
+        <script type="module" src = "/script/login.js"></script>
     </body>
 </html>

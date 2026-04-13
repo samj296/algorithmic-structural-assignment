@@ -5,15 +5,18 @@ const fsLogic = require("../backendLogic/fileSystemLogic");
 const userController = require("../controllers/userController");
 
 router.get("/signup", userController.getSignUpPage);
-router.get("/", userController.login);
+router.get("/", userController.getloginPage);
 router.post("/logout", userController.logout);
+router.post("/signup", userController.createUser);
 // --------------- protected route --------------------------
-
-router.post("homepage", passport.authenticate("local"), (req, res) => {
-    // creating fresh root for the user
+router.post("/login", passport.authenticate("local"), (req, res) => {
     req.session.root = fsLogic.createRoot("root");
-    req.session.currentPath = "/"
-    res.render("login");
+    req.session.currentPath = "/";
+    res.redirect("/homepage");
+});
+
+router.get("/homepage", (req, res) => {
+    res.render("terminal",{title: "Mighty Husk"});
 });
 
 module.exports = router;
