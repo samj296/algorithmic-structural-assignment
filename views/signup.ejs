@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <title> Mighty Husk - Login </title>
+        <link rel="stylesheet" href = "/assets/CSS/style.css">
+    </head>
+    <body>
+           
+           <%- include("partials/header",{
+                header: "L o a d i n g  D O O R  O S......",
+                pTag: "Disk Operating Output Runtime"
+            }) %>
+        
+        <form action = "/signup" method = "post" class = "login-form">
+            <input class = "input" type = "text" placeholder = "email" name = "email" required>
+            <br>
+            <input class = "input" type = "password" placeholder = "Password">
+            <br>
+            <button class = "btn" type = "submit" data-action="sign-up">Sign Up</button>
+            <button class = "btn" type = "button" data-action = "login">Login</button>
+            <button class = "btn" type = "reset" data-action = "reset">Reset</button>
+        </form>
+        <script type="module" src = "/script/terminalEngine.js"></script>
+    </body>
+</html>

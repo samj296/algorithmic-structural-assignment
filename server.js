@@ -3,18 +3,24 @@ const express = require("express");
 const session = require("express-session");
 const passport = require("./auth/passport");
 const mongoose = require("mongoose");
-const app = express();
 const errorHandler = require("./middleware/errorHandling");
-
-
-const PORT = process.env.PORT || 3000;
-const MONOGODB_URI = process.env.MONOGODB_URI;
 
 // importing routes
 const fileSystemRoute = require("./routes/fileSystemRoute");
 const userRoute = require("./routes/userRoute");
 
-// middleware
+const PORT = process.env.PORT || 3000;
+const MONOGODB_URI = process.env.MONOGODB_URI;
+
+const app = express();
+
+app.use((req, res, next) => {
+    next();
+});
+
+app.set("view engine", "ejs");
+app.use(express.static("public"));
+
 app.use(express.json());
 // for form submission
 app.use(express.urlencoded({extended:false}));

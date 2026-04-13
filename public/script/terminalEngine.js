@@ -1,9 +1,7 @@
-import { Command } from "./hashtable";
-import { api } from "./fetch";
+import { Command } from "./hashtable.js";
 
 const terminalOutput = document.getElementById("terminal-output");
 const cmdInput = document.getElementById("command");
-const path = document.getElementById("user-folder-location");
 
 cmdInput.addEventListener("submit", cmdIdentify)
 

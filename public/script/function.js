@@ -1,12 +1,6 @@
-// const command = {
-//     cd: {run: changeDirectory},
-//     mv: {run: moveFolder}
-// };
-
-
 import {Command} from "./hashtable.js";
 import {api} from "./fetch.js"
-import {creatBinaryTree} from "./dsa.js";
+import {createBinaryTree, dfs, bfs} from "./dsa.js"
 
 const terminalOutput = document.getElementById("terminal-output");
 
@@ -16,7 +10,7 @@ function helpCommand(){
     for(const key of Object.keys(Command)){
         output += `${key} - ${Command[key].description}\n`;
     };
-    return output;
+    terminalOutput.value += output;
 };
 
 function clearCommand(){
@@ -77,37 +71,56 @@ async function loadingPage(str){
     
 };
 
-async function changeDirectory(directory){
+async function changeDirectory(directory, fullCmd){
     const path = document.getElementById("user-folder-location"); //parent folder will be in this path
-    if(directory == null){
-        terminalOutput += `Invalid command \n`
+    if(!directory){
+        terminalOutput.value += `Invalid command \n`
         return;
     };
+    let data = null;
     if(directory === ".."){ // if its not root go to parent folder
-       pathArray = path.innerText.split("/");
-       pathArray.pop();
-       parentPath = "/" + pathArray.join("/");
-    }; 
-
-    data = await api("/cd",{
+        const pathArray = path.innerText.split("/").filter(Boolean);
+        pathArray.pop()
+        const parentPath = `/${pathArray.join("/")}`
+        data = await api("/cd",{
         method: "POST",
         body: JSON.stringify({path: parentPath})
-    });
-    
+       });
+    }else if(directory.startsWith("/")){ // if directory start with "/" then its an absolute path 
+        data = await api("/cd",{
+            method: "POST",
+            body: JSON.stringify({path:directory})
+        });
+    }else{ //it menas it just folder name from the children list
+        data = await api("/cd",{
+            method: "POST",
+            body: JSON.stringify({path: `${path.innerText}/${directory}`})
+        });
+    }; 
 
-};
-
-function bfs(root){
-    binaryRoot = creatBinaryTree(root);
-    
-    let q = [binaryRoot];
-
-    while(q.length>0){
-        let current = q.shift()
-        terminalOutput.value += `\n ${current.value}`
-        if(current.left) q.push(current.left);
-        if(current.right) q.push(current.right);
+    if(data.error){
+        terminalOutput.value += ` ${fullCmd}\n invalid path: ${directory}\n`;
+        return;
     };
+    terminalOutput.value += `${fullCmd}\n`
+    path.innerText = data.path;
+
 };
 
-export {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, getTree, loadingPage, bfs};
+async function runBfs(){
+    const root = await getTree()
+    terminalOutput.value += `converting non binary tree to binary tree \n ${createBinaryTree.toString()}\n`;
+    const binaryTree = createBinaryTree(root);
+    terminalOutput.value += `Running bfs to print out the folder name \n ${bfs.toString()} \n`;
+    bfs(binaryTree);
+};
+
+async function runDFS(){
+    const root = await getTree()
+    terminalOutput.value += `converting non binary tree to binary tree \n ${createBinaryTree.toString()}\n`;
+    const binaryTree = createBinaryTree(root);
+    terminalOutput.value += `Running DFS to print out the folder name \n ${dfs.toString()}\n`;
+    dfs(binaryTree);
+};
+
+export {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, getTree, changeDirectory, loadingPage, runBfs, runDFS};

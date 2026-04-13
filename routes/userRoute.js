@@ -9,11 +9,11 @@ router.get("/", userController.login);
 router.post("/logout", userController.logout);
 // --------------- protected route --------------------------
 
-router.post("login", passport.authenticate("local"), (req, res) => {
+router.post("homepage", passport.authenticate("local"), (req, res) => {
     // creating fresh root for the user
     req.session.root = fsLogic.createRoot("root");
     req.session.currentPath = "/"
-    //here I will render the homepage
+    res.render("login");
 });
 
 module.exports = router;

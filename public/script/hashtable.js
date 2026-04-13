@@ -1,4 +1,4 @@
-import {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, getTree, loadingPage, bfs} from "./function"
+import {helpCommand, clearCommand, exitCommand, createFolder, moveFolder, changeDirectory, runBfs, runDFS} from "./function"
 const Command = {
     help: {
         run: helpCommand,
@@ -25,11 +25,11 @@ const Command = {
         description: `Moves a folder/file`
     },
     bfs: {
-        run: bfs,
+        run: runBfs,
         description: `converts non binary tree(directory) and change it to the binary tree and will run the bfs`
     },
     dfs: {
-        run: dfs,
+        run: runDFS,
         description: `converts non binary tree(directory) and change it to the binary tree and will run the dfs`
     }
 };

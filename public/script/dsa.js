@@ -19,7 +19,7 @@ function getAllNode(root, result = []){
     return result;
 };
 
-function creatBinaryTree(root){
+function createBinaryTree(root){
     const allNode = getAllNode(root,[]);
 
     const rootNode = allNode.shift();
@@ -40,4 +40,29 @@ function creatBinaryTree(root){
     return newRoot;
 };
 
-export {creatBinaryTree};
+function bfs(binaryRoot){
+// this function will return all the folder name with breadth first search method
+    let q = [binaryRoot];
+
+    while(q.length>0){
+        let current = q.shift()
+        terminalOutput.value += `\n ${current.value}`
+        if(current.left) q.push(current.left);
+        if(current.right) q.push(current.right);
+    };
+};
+
+function dfs(binaryRoot){ 
+   if(!binaryRoot) return;
+   let stack = [binaryRoot];
+
+   while(stack.length>0){
+        let current = stack.pop();
+        terminalOutput.value += current.value + "\n"
+        // pushing right first so the left is processed first (LIFO)
+        if(current.right) stack.push(current.right);
+        if(current.left)stack.push(current.left);
+   };
+};
+
+export {createBinaryTree, dfs, bfs};
