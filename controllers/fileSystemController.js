@@ -31,7 +31,7 @@ exports.createFolder = async(req, res) => {
     res.status(200).json({
         success: true,
         message: "Folder created",
-        path: `${path} /${node.name}`,
+        path: `${path}/${node.name}`
     });
 };
 

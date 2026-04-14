@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require("../auth/passport");
 const fsLogic = require("../backendLogic/fileSystemLogic");
 const userController = require("../controllers/userController");
+const ensureLoggedIn = require("../middleware/ensureLoggedIn");
 
 router.get("/signup", userController.getSignUpPage);
 router.get("/", userController.getloginPage);
@@ -15,8 +16,11 @@ router.post("/login", passport.authenticate("local"), (req, res) => {
     res.redirect("/homepage");
 });
 
-router.get("/homepage", (req, res) => {
-    res.render("terminal",{title: "Mighty Husk"});
+router.get("/homepage", ensureLoggedIn, (req, res) => {
+    res.render("terminal",{
+        title: "Mighty Husk",
+        root: req.session.root.value
+    });
 });
 
 module.exports = router;

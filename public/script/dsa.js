@@ -52,26 +52,28 @@ function createBinaryTree(root){
 function bfs(binaryRoot){
 // this function will return all the folder name with breadth first search method
     let q = [binaryRoot];
-
+    let output ="";
     while(q.length>0){
         let current = q.shift()
-        terminalOutput.value += `\n ${current.value}`
+        output += `\n ${current.value}`
         if(current.left) q.push(current.left);
         if(current.right) q.push(current.right);
     };
+    return output;
 };
 
 function dfs(binaryRoot){ 
    if(!binaryRoot) return;
    let stack = [binaryRoot];
-
+   let output ="";
    while(stack.length>0){
         let current = stack.pop();
-        terminalOutput.value += current.value + "\n"
+        output += current.value + "\n"
         // pushing right first so the left is processed first (LIFO)
         if(current.right) stack.push(current.right);
         if(current.left)stack.push(current.left);
    };
+   return output;
 };
 
 export {createBinaryTree, dfs, bfs, TreeNode};
