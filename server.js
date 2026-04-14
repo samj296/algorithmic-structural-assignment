@@ -39,8 +39,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-//error handler
-app.use(errorHandler);
+
 
 // ----------- end of middleware------------
 
@@ -49,6 +48,9 @@ app.use(errorHandler);
 
 app.use("/", userRoute);
 app.use("/fs", fileSystemRoute);
+
+//error handler
+app.use(errorHandler);
 
 // running server
 mongoose

@@ -10,8 +10,10 @@ async function api(path, options = {}){
 
     const data = await res.json().catch(() => null);
     if(!res.ok){
-        const msg = data?.error || `Request failed (${res.status})`;
-        alert(msg);
+        return {
+            error: true,
+            errorText: data?.error || `Request failed (${res.status})`
+        };
     };
     return data;
 };

@@ -11,7 +11,7 @@ form.addEventListener("submit", cmdIdentify)
 async function cmdIdentify(event){
     event.preventDefault(); // this will stop from refresh inside a form.
     terminalOutput.value += `${drive.innerText} ${currentLocation.innerText} ${cmdInput.value} \n`;
-
+    terminalOutput.scrollTop = terminalOutput.scrollHeight; //got this from the copilot this will always show the new line
     const input = cmdInput.value.trim().split(" ");
     const cmd = input.shift();
     const actionText = input.join(" ").trim();
@@ -30,14 +30,16 @@ async function cmdIdentify(event){
         clear: true/false
     }
     */
-   let funResponse = null
+    cmdInput.value = ""; //command line cleared here
+    let funResponse = null
+    
     if(Command[cmd]){
         funResponse = await Command[cmd].run(actionText);
     }else{
         terminalOutput.value += `Unknown command: ${cmd} \n`;
     };
 
-    cmdInput.value = ""; //command line cleared here
+   
 
     if(funResponse && funResponse.error){
         terminalOutput.value += `${funResponse.errorText} \n`;
@@ -56,6 +58,6 @@ async function cmdIdentify(event){
     // updating path
     if(funResponse && funResponse.updatePath) currentLocation.innerText = funResponse.updateText;
     
-    
+    terminalOutput.scrollTop = terminalOutput.scrollHeight; //got this from the copilot this will always show the new line
 
 };

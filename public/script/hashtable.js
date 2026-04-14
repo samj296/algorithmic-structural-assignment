@@ -30,11 +30,8 @@ const Command = {
 
     cd: {
         description: `Change directory`,
-        run(args) {
-            terminalOutput.value += args + "\n";
-            cmd = args.split(" ");
-            if(cmd){}
-            changeDirectory(args.trim());
+        async run(args) {
+            return await changeDirectory(args.trim());
         }
     },
 
