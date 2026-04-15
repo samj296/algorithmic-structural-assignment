@@ -1,23 +1,8 @@
 import {Command} from "./hashtable.js";
-import {api} from "./fetch.js"
-import {createBinaryTree, dfs, bfs} from "./dsa.js"
+import {api} from "./fetch.js";
+import {createBinaryTree, dfs, bfs} from "./dsa.js";
+import {termianlResponse, normalizePath} from "./helperFunction.js";
 
-
-function termianlResponse(options = {}){
-    return {
-        print: false,
-        printText: "",
-
-        updatePath: false,
-        updateText: "",
-
-        error: false,
-        errorText: "",
-
-        clear: false,
-        ...options
-    };
-};
 function helpCommand(){
     let output = "\nCommands:\n"
     for(const key of Object.keys(Command)){
@@ -50,6 +35,7 @@ async function exitCommand(){
 };
 
 async function createFolder(name, path){
+    path = normalizePath(path);
     const data = await api("/fs/create",{
         method: "POST",
         body:JSON.stringify({name, path})
@@ -66,6 +52,8 @@ async function createFolder(name, path){
 };
 
 async function moveFolder(oldPath, newPath, name){
+    oldPath = normalizePath(oldPath);
+    newPath = normalizePath(newPath)
     //const {newPath, oldPath} = req.body; backend pattern
     const data = await api("/fs/move",{
         method: "POST",
@@ -124,7 +112,7 @@ async function getTree(){
 
 
 async function changeDirectory(directory){
-    const path = document.getElementById("user-folder-location"); //parent folder will be in this path
+    const pathDOM = document.getElementById("user-folder-location"); //parent folder will be in this path
     if(!directory){
         return termianlResponse({
             print: true,
@@ -134,22 +122,30 @@ async function changeDirectory(directory){
     };
     let data = null;
     if(directory === ".."){ // if its not root go to parent folder
-        const pathArray = path.innerText.split("/").filter(Boolean);
+        const pathArray = pathDOM.innerText.split("/").filter(Boolean);
         pathArray.pop()
-        const parentPath = `/${pathArray.join("/")}`
+        if(pathArray.length<1) return termianlResponse({
+            print: true,
+            printText: `Can't change the directory already in the root folder`
+        });
+        let parentPath = `/${pathArray.join("/")}`
+        parentPath = normalizePath(parentPath);
         data = await api("/fs/cd",{
         method: "POST",
         body: JSON.stringify({path: parentPath})
        });
     }else if(directory.startsWith("/")){ // if directory start with "/" then its an absolute path 
+        directory = normalizePath(directory);
         data = await api("/fs/cd",{
             method: "POST",
             body: JSON.stringify({path:directory})
         });
     }else{ //it means it just folder name from the children list
+        let newPath = `${pathDOM.innerText}/${directory}`
+        newPath = normalizePath(newPath);
         data = await api("/fs/cd",{
             method: "POST",
-            body: JSON.stringify({path: `${path.innerText}/${directory}`})
+            body: JSON.stringify({path: newPath})
         });
     }; 
 

@@ -1,7 +1,53 @@
 const {TreeNode} = require("../models/FileSystem")
 
+/* Helper function */
+
+function findNodeByPath(root, path){
+    // Normalize the path before using it
+    path = normalizePath(path);
+
+    if(!path.startsWith(root.value)){
+        path = `${root.value}/${path}`
+    };
+
+    const pathArray = path.split("/").filter(Boolean); //Boolean will return only the strings that
+                                                // undefined and empty string will be ignored
+
+    if(pathArray.length === 1) return root;
+
+    let currentNode = root;
+
+    
+
+    
+
+    for(const name of pathArray.slice(1)){
+        const next = currentNode.children.find(child =>child.value === name);
+        if(!next) return null;
+        currentNode = next;
+    };
+    return currentNode;
+};
+
+function normalizePath(path){
+    // Removing leading slashes
+    while(path.startsWith("/")){
+        path = path.slice(1);
+    };
+
+    // Removing the trailing slashes
+    while(path.endsWith("/")){
+        path = path.slice(0, -1);
+    };
+    return path;
+};
+
+
+/* ------------------------------------------------------------------------------ */
+
 function createRoot(name){
     let root = new TreeNode(name)
+
     return root;
 };
 
@@ -26,7 +72,6 @@ function moveFolder(newPath,oldPath, root){
     const newParent = findNodeByPath(root, newPath);
     if(!oldParent || !newParent){
         throw new Error("Invalid path");
-        return;
     };
 
     //find the actual node
@@ -45,26 +90,25 @@ function moveFolder(newPath,oldPath, root){
     //objects are passed as the reference
 };
 
-function findNodeByPath(root, path){
-    const pathArray = path.split("/");
-    let currentNode = root;
-    for(const name of pathArray){
-        currentNode = currentNode.children.find(child =>child.value === name);
-        if(!currentNode) return null;
-    };
-    return currentNode;
-};
 
 function findParentByPath(root, path){
+    path = normalizePath(path);
+
+    if(!path.startsWith(root.value)){
+        path = `${root.value}/${path}`;
+    };
+
     const pathArray = path.split("/").filter(Boolean); //Boolean will return only the strings that
-                            // undefined and emty string will be ignored
+                            // undefined and empty string will be ignored
     // if array has the length of 1 then root is the parent
     if(pathArray.length <= 1) return root;
-    const parentPathArray = pathArray.slice(0, pathArray.length-1);
+
+    const parentPathArray = pathArray.slice(1, pathArray.length-1);
 
     let currentNode = root;
+
     for(const name of parentPathArray){
-        const nextNode = currentNode.children.find(child => child.name === name);
+        const nextNode = currentNode.children.find(child => child.value === name);
         if(!nextNode) return null; // invalid path
         currentNode = nextNode
     };
